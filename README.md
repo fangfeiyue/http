@@ -34,6 +34,8 @@
 - 所有数据以二进制进行传输，HTTP1.1大部分数据是通过字符串传输的
 - 同一个连接里面发送多个请求不再需要按照顺序来
 - 头信息压缩以及推送等提高效率的功能
+### HTTP的三次握手
+![HTTP的三次握手](https://github.com/fangfeiyue/http/blob/master/imgs/tcpconnection.png)
 ## 传说中的彩蛋
 - Mac系统如何“剪切-粘贴”文件
 想要“剪切-粘贴”文件，先选定要剪切的文件，按command+c，然后到要粘贴的文件夹中按option+command+v，就可以实现“剪切-粘贴”
