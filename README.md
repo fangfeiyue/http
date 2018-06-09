@@ -46,6 +46,12 @@ HTTP不存在连接这个概念，它只要请求和响应这么一个概念，�
 - URI 统一资源标志符，包含URL、URN
 - URL 统一资源定位符
 - URN 永久统一资源定位符
+## HTTP报文格式
+![HTTP的三次握手](https://github.com/fangfeiyue/http/blob/master/imgs/baowen.png)
+### HTTP code 
+- 定义服务器对请求的处理结果
+- 各个区间的code有各自的语义
+- 好的http服务可以通过code的判断结果
 ## 传说中的彩蛋
 - Mac系统如何“剪切-粘贴”文件
 想要“剪切-粘贴”文件，先选定要剪切的文件，按command+c，然后到要粘贴的文件夹中按option+command+v，就可以实现“剪切-粘贴”
