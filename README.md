@@ -4,6 +4,9 @@
 ## 内容介绍
 ![http请求的完整过程](https://github.com/fangfeiyue/http/blob/master/imgs/http.png)
 
+## 五层网络模型介绍
+![经典五层模型](https://github.com/fangfeiyue/http/blob/master/imgs/netmodel.png)
+
 ## 传说中的彩蛋
 - Mac系统如何“剪切-粘贴”文件
 想要“剪切-粘贴”文件，先选定要剪切的文件，按command+c，然后到要粘贴的文件夹中按option+command+v，就可以实现“剪切-粘贴”
