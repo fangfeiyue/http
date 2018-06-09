@@ -36,6 +36,9 @@
 - 头信息压缩以及推送等提高效率的功能
 ### HTTP的三次握手
 ![HTTP的三次握手](https://github.com/fangfeiyue/http/blob/master/imgs/tcpconnection.png)
+HTTP不存在连接这个概念，它只要请求和响应这么一个概念，请求和响应都是数据包它们之间是要通过一个数据传输的通道的，就在TCP里面创建了一个从客户端发起到服务端的连接
+![HTTP的三次握手](https://github.com/fangfeiyue/http/blob/master/imgs/three.png)
+
 ## 传说中的彩蛋
 - Mac系统如何“剪切-粘贴”文件
 想要“剪切-粘贴”文件，先选定要剪切的文件，按command+c，然后到要粘贴的文件夹中按option+command+v，就可以实现“剪切-粘贴”
