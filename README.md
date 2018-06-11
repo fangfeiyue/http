@@ -60,7 +60,7 @@ curl www.baidu.com
 curl -v www.baidu.com
 ```
 ## CORS跨域请求的限制与解决
-
+浏览器在发送请求的时候并不知道是否跨域，所以请求是可以发出的，也会接收服务端返回的内容，只不过浏览器在看到response header里没有Access-Control-Allow-Origin这个属性并且设置为允许，浏览器会把请求返回的内容忽略掉并且在console里面报错`No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8888' is therefore not allowed access.`
 ## 传说中的彩蛋
 - Mac系统如何“剪切-粘贴”文件
 想要“剪切-粘贴”文件，先选定要剪切的文件，按command+c，然后到要粘贴的文件夹中按option+command+v，就可以实现“剪切-粘贴”
