@@ -100,9 +100,11 @@ http.createServer((request, response) => {
 console.log('server listening 8887');
 ```
 ### 预请求验证
+跨域限制是为了保证服务端安全，浏览器在发送跨域请求时会先发送一个options请求来获得服务端允许的认可，然后再实际发送对应的请求(如post， get等)
+
 ![预请求](https://github.com/fangfeiyue/http/blob/master/imgs/options.png)
 
-跨域限制是为了保证服务端安全
+跨域资源共享标准新增了一组 HTTP 首部字段，允许服务器声明哪些源站有权限访问哪些资源。另外，规范要求，对那些可能对服务器数据产生副作用的 HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求），浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求。服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 Cookies 和 HTTP 认证相关数据）。具体描述详见[HTTP访问控制（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
 
 ## 传说中的彩蛋
 - Mac系统如何“剪切-粘贴”文件
