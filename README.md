@@ -105,6 +105,61 @@ console.log('server listening 8887');
 ![预请求](https://github.com/fangfeiyue/http/blob/master/imgs/options.png)
 
 跨域资源共享标准新增了一组 HTTP 首部字段，允许服务器声明哪些源站有权限访问哪些资源。另外，规范要求，对那些可能对服务器数据产生副作用的 HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求），浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求。服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 Cookies 和 HTTP 认证相关数据）。具体描述详见[HTTP访问控制（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
+## 缓存头Cache-Control的含义和使用
+### 可缓存性
+- 常用 cache-directive 值
+    - public    所有内容都将被缓存(客户端和代理服务器都可缓存)
+    - private   内容只缓存到私有缓存中(仅客户端可以缓存，代理服务器不可缓存)
+    - no-cache  任何一个节点都不进行缓存
+- 到期
+    - max-age=<seconds>  在 xxx 秒后，浏览器重新发送请求到服务器
+    - s-maxage=<seconds> 会代替max-age,但是只有在代理服务器里面才会生效
+    - max-stale=<seconds> 只要在这个时间内，还可以使用过期的缓存而不需要去服务器请求新的内容。这个属性在发起端设置才有用，在服务端返回的内容中设置这个属性没有用
+- 重新验证
+    - must-revalidate 如果缓存的内容失效，请求必须发送到服务器/代理以进行重新验证
+    - proxy-revalidate 如果缓存的内容失效，请求必须发送到服务器/代理以进行重新验证
+- 其他
+    - no-store 所有内容都不会被缓存到缓存或 Internet 临时文件中
+    - no-transform
+
+- 实例
+```
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <script src="./script.js"></script>
+</body>
+</html>
+```
+如上代码，当在浏览器中运行,打开Network选项卡，刷新页面后会看到每次script.js文件都加载了
+![缓存一](https://github.com/fangfeiyue/http/blob/master/imgs/huancun1.png)
+
+````
+const http = require('http')
+const fs = require('fs')
+
+http.createServer(((request, response) => {
+
+    if (request.url == '/') {
+        const html = fs.readFileSync('test.html', 'utf8')
+        response.writeHead(200, {
+            'Content-type': 'text/html'
+        })
+
+        response.end(html)
+    }else if (request.url == '/script.js') {
+        response.writeHead(200, {
+            'Content-type': 'text/javascript',
+            'Cache-Control': 'max-age=10'
+        })
+
+        response.end('console.log("script loaded")')
+    }
+})).listen(8888)
+
+console.log('server listening on 8888')
+````
+如上代码，我们在header中写入了`'Cache-Control': 'max-age=10'`，意思就是缓存十秒。
 
 ## 传说中的彩蛋
 - Mac系统如何“剪切-粘贴”文件
