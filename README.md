@@ -162,7 +162,7 @@ console.log('server listening on 8888')
 ````
 我们在header中写入了`'Cache-Control': 'max-age=10'`，意思就是缓存十秒。然后再刷新页面，就会发现十秒内如果我们不更换url的话，浏览器中的Network选项卡显示如下
 ![缓存二](https://github.com/fangfeiyue/http/blob/master/imgs/huancun2.png)
-可以看到请求时间为0，尺寸显示为from memory cache，就是从缓存中读取的文件。这样可以有效提升效率
+可以看到请求时间为0，尺寸显示为from memory cache，就是从缓存中读取的文件,这样可以有效提升效率.
 
 
 ## 传说中的彩蛋
