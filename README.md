@@ -167,7 +167,11 @@ console.log('server listening on 8888')
 但是也会带来一些问题，比如服务端的代码已经变了，但以为此时浏览器还是从缓冲中读取的数据，就会导致无法及时获得服务端的更新。常见的前端解决方案，我们会根据文件内容给文件名加上一段hash码，如果js中的内容没有变，它的hash码就不会变，反应到页面就是资源的url没有变，那么我就可以使用静态资源缓存。如果js中的内容发生变化，它的hash码就会变，也就是url变了，就会发起一个新的静态资源请求，而不是使用缓存中的内容。这样就可以达到一个更新缓存的目的。
 
 ## 缓存验证Last-Modified和Etag的使用
+![读取缓存的流程](https://github.com/fangfeiyue/http/blob/master/imgs/huancun3.png)
 
+- 验证头
+    - Last-Modified 上次修改时间，主要配合If-Modified-Since或者If-Unmodified-Since使用，对比上次修改时间以验证资源是否需要更新
+    - Etag 配合If-Match或者If-Non-Match使用，对比资源的签名判断是否使用缓存
 
 ## 传说中的彩蛋
 - Mac系统如何“剪切-粘贴”文件
