@@ -6,35 +6,35 @@
 
 ## 五层网络模型介绍
 ![经典五层模型](https://github.com/fangfeiyue/http/blob/master/imgs/netmodel.png)
-### 低三层
+#### 低三层
 - 物理层主要作用是定义物理设备如何传输数据
 - 数据链路层在通信的实体间建立数据链路连接
 - 网络层为数据在结点之间传输创建逻辑链路
-### 传输层
+#### 传输层
 - 向用户提供可靠的端到端的服务
 - 传输层向高层屏蔽了下层数据通信的细节
-### 应用层
+#### 应用层
 - 为应用软件提供了很多服务
 - 构建于TCP协议之上
 - 屏蔽了网络传输相关细节
 ## HTTP协议的发展历史
-### HTTP/0.9
+#### HTTP/0.9
 - 只有一个GET命令
 - 没有HEADER等描述数据的信息
 - 服务器发送完毕，就关闭TCP连接，注意：一个TCP连接可以对应多个HTTP请求
-### HTTP/1.0
+#### HTTP/1.0
 - 增加了很多命令
 - 增加了status code和header
 - 多字符集的支持、多部分发送、权限、缓存等
-### HTTP/1.1
+#### HTTP/1.1
 - 持久连接
 - pipeline
 - 增加host和其他一些命令
-### HTTP/2
+#### HTTP/2
 - 所有数据以二进制进行传输，HTTP1.1大部分数据是通过字符串传输的
 - 同一个连接里面发送多个请求不再需要按照顺序来
 - 头信息压缩以及推送等提高效率的功能
-### HTTP的三次握手
+#### HTTP的三次握手
 ![HTTP的三次握手](https://github.com/fangfeiyue/http/blob/master/imgs/tcpconnection.png)
 HTTP不存在连接这个概念，它只要请求和响应这么一个概念，请求和响应都是数据包它们之间是要通过一个数据传输的通道的，就在TCP里面创建了一个从客户端发起到服务端的连接
 ![HTTP的三次握手](https://github.com/fangfeiyue/http/blob/master/imgs/three.png)
@@ -48,7 +48,7 @@ HTTP不存在连接这个概念，它只要请求和响应这么一个概念，�
 - URN 永久统一资源定位符
 ## HTTP报文格式
 ![HTTP的三次握手](https://github.com/fangfeiyue/http/blob/master/imgs/baowen.png)
-### HTTP code 
+#### HTTP code 
 - 定义服务器对请求的处理结果
 - 各个区间的code有各自的语义
 - 好的http服务可以通过code的判断结果
@@ -63,7 +63,7 @@ curl -v www.baidu.com
 浏览器在发送请求的时候并不知道是否跨域，所以请求是可以发出的，也会接收服务端返回的内容，只不过浏览器在看到response header里没有Access-Control-Allow-Origin这个属性并且设置为允许，浏览器会把请求返回的内容忽略掉并且在console里面报错`No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8888' is therefore not allowed access.`
 
 ## CORS跨域限制以及预请求验证
-### CORS跨域限制
+#### CORS跨域限制
 - 默认允许的方法
     - GET
     - POST
@@ -99,14 +99,14 @@ http.createServer((request, response) => {
 
 console.log('server listening 8887');
 ```
-### 预请求验证
+#### 预请求验证
 跨域限制是为了保证服务端安全，浏览器在发送跨域请求时会先发送一个options请求来获得服务端允许的认可，然后再实际发送对应的请求(如post， get等)
 
 ![预请求](https://github.com/fangfeiyue/http/blob/master/imgs/options.png)
 
 跨域资源共享标准新增了一组 HTTP 首部字段，允许服务器声明哪些源站有权限访问哪些资源。另外，规范要求，对那些可能对服务器数据产生副作用的 HTTP 请求方法（特别是 GET 以外的 HTTP 请求，或者搭配某些 MIME 类型的 POST 请求），浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求。服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 Cookies 和 HTTP 认证相关数据）。具体描述详见[HTTP访问控制（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
 ## 缓存头Cache-Control的含义和使用
-### 可缓存性
+#### 可缓存性
 - 常用 cache-directive 值
     - public    所有内容都将被缓存(客户端和代理服务器都可缓存)
     - private   内容只缓存到私有缓存中(仅客户端可以缓存，代理服务器不可缓存)
@@ -165,6 +165,8 @@ console.log('server listening on 8888')
 可以看到请求时间为0，尺寸显示为from memory cache，就是从缓存中读取的文件,这样可以有效提升效率.
 
 但是也会带来一些问题，比如服务端的代码已经变了，但以为此时浏览器还是从缓冲中读取的数据，就会导致无法及时获得服务端的更新。常见的前端解决方案，我们会根据文件内容给文件名加上一段hash码，如果js中的内容没有变，它的hash码就不会变，反应到页面就是资源的url没有变，那么我就可以使用静态资源缓存。如果js中的内容发生变化，它的hash码就会变，也就是url变了，就会发起一个新的静态资源请求，而不是使用缓存中的内容。这样就可以达到一个更新缓存的目的。
+
+## 缓存验证Last-Modified和Etag的使用
 
 
 ## 传说中的彩蛋
