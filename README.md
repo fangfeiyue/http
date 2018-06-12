@@ -134,6 +134,7 @@ console.log('server listening 8887');
 如上代码，当在浏览器中运行,打开Network选项卡，刷新页面后会看到每次script.js文件都加载了
 ![缓存一](https://github.com/fangfeiyue/http/blob/master/imgs/huancun1.png)
 
+当我们在服务端配置了`Cache-Control`属性，具体代码如下
 ````
 const http = require('http')
 const fs = require('fs')
@@ -159,7 +160,10 @@ http.createServer(((request, response) => {
 
 console.log('server listening on 8888')
 ````
-如上代码，我们在header中写入了`'Cache-Control': 'max-age=10'`，意思就是缓存十秒。
+我们在header中写入了`'Cache-Control': 'max-age=10'`，意思就是缓存十秒。然后再刷新页面，就会发现十秒内如果我们不更换url的话，浏览器中的Network选项卡显示如下
+![缓存二](https://github.com/fangfeiyue/http/blob/master/imgs/huancun2.png)
+可以看到请求时间为0，尺寸显示为from memory cache，就是从缓存中读取的文件。这样可以有效提升效率
+
 
 ## 传说中的彩蛋
 - Mac系统如何“剪切-粘贴”文件
